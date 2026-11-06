@@ -15,3 +15,4 @@ https://github.com/520DONNACHANG/DONNACHANG20261104
 4. 暫存所有檔案、生成 Commit 並推送到遠端。
 
 
+部署完成後，預期網址為：https://520donnachang.github.io/DONNACHANG20261104/
