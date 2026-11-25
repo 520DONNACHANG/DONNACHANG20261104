@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>森球 KOKEDAMA | 手作水苔球植栽藝術</title>
+  <!-- 引入 Google Fonts：思源宋體與思源黑體，營造人文質感 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* =========================================
+       1. 品牌色彩與變數設定 (Brand Variables)
+       ========================================= */
+    :root {
+      --bg-primary: #F7F5F0;      /* 溫潤宣紙白 */
+      --bg-secondary: #EFECE6;    /* 淺亞麻灰 */
+      --text-main: #2C3028;       /* 深炭墨綠 */
+      --text-muted: #686D61;      /* 枯葉灰綠 */
+      --accent-moss: #4A5D4E;     /* 核心苔蘚綠 */
+      --accent-earth: #8C6D53;    /* 赤陶泥土棕 */
+      --white: #FFFFFF;
+      --radius-soft: 12px;
+      --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* =========================================
+       2. 基礎重置與排版 (Reset & Typography)
+       ========================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--accent-earth);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--text-main);
+    }
+
+    /* =========================================
+       3. 導覽列 (Navigation)
+       ========================================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(247, 245, 240, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(44, 48, 40, 0.06);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--accent-moss);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent-moss);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 4px;
+      transition: var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent-moss);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-moss);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================================
+       4. 主視覺區 (Hero Section)
+       ========================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      line-height: 1.35;
+      margin-bottom: 24px;
+      color: var(--text-main);
+    }
+
+    .hero-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 40px;
+      max-width: 460px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 36px;
+      background-color: var(--accent-moss);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      transition: var(--transition);
+      border: 1px solid var(--accent-moss);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--accent-moss);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      border-radius: 200px 200px 16px 16px; /* 拱門造型增添日式禪意 */
+      box-shadow: 0 20px 40px rgba(44, 48, 40, 0.08);
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    /* =========================================
+       5. 品牌理念 (Brand Philosophy)
+       ========================================= */
+    .about {
+      background-color: var(--bg-secondary);
+    }
+
+    .about-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* =========================================
+       6. 精選作品展示 (Product Showcase)
+       ========================================= */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-soft);
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid rgba(44, 48, 40, 0.05);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba(44, 48, 40, 0.08);
+    }
+
+    .product-img {
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      background-color: #E5E2DC;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 24px;
+      text-align: center;
+    }
+
+    .product-tag {
+      font-size: 0.75rem;
+      color: var(--accent-earth);
+      letter-spacing: 0.15em;
+    }
+
+    .product-info h3 {
+      font-size: 1.2rem;
+      margin: 8px 0;
+    }
+
+    .product-price {
+      color: var(--accent-moss);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 8px 24px;
+      border: 1px solid var(--accent-moss);
+      color: var(--accent-moss);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--accent-moss);
+      color: var(--white);
+    }
+
+    /* =========================================
+       7. 養護指南 (Care Guide)
+       ========================================= */
+    .care {
+      background-color: var(--bg-secondary);
+    }
+
+    .care-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .care-item {
+      background: var(--bg-primary);
+      padding: 40px 30px;
+      border-radius: var(--radius-soft);
+      text-align: center;
+    }
+
+    .care-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+      background-color: rgba(74, 93, 78, 0.1);
+      color: var(--accent-moss);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .care-item h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .care-item p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    /* =========================================
+       8. 頁尾 (Footer)
+       ========================================= */
+    footer {
+      background-color: var(--text-main);
+      color: var(--bg-primary);
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.15em;
+    }
+
+    .footer-desc {
+      color: rgba(247, 245, 240, 0.6);
+      font-size: 0.9rem;
+      max-width: 400px;
+      margin: 0 auto 30px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      font-size: 0.9rem;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-earth);
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: rgba(247, 245, 240, 0.4);
+      border-top: 1px solid rgba(247, 245, 240, 0.1);
+      padding-top: 24px;
+    }
+
+    /* =========================================
+       9. 響應式設計 (Responsive Design)
+       ========================================= */
+    @media (max-width: 768px) {
+      .hero-grid, .product-grid, .care-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-text {
+        text-align: center;
+      }
+      .hero-text p {
+        margin: 0 auto 32px;
+      }
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .nav-links {
+        display: none; /* 手機版可依需求擴充漢堡選單 */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          <span class="logo-dot"></span>
+          森球 KOKEDAMA
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">品牌理念</a></li>
+          <li><a href="#products">植栽作品</a></li>
+          <li><a href="#care">養護日常</a></li>
+          <li><a href="#contact">聯絡訂製</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主視覺區 -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1>將一座微縮森林，<br>捧在掌心之中。</h1>
+          <p>擺脫傳統盆器的束縛，以天然赤玉土與翠綠水苔手工包覆，讓植物以最純粹的姿態融入你的生活空間。</p>
+          <a href="#products" class="btn-primary">探索手作植栽</a>
+        </div>
+        <div class="hero-image">
+          <!-- 建議替換為你的品牌高畫質水苔球主圖 -->
+          <img src="https://images.unsplash.com/photo-1597055181300-e3633a917c9c?auto=format&fit=crop&w=800&q=80" alt="手作水苔球植栽">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 品牌理念 -->
+  <section id="about" class="section-padding about">
+    <div class="container">
+      <div class="section-title">
+        <span>Philosophy</span>
+        <h2>呼吸的藝術，靜謐的陪伴</h2>
+      </div>
+      <div class="about-content">
+        <p>水苔球（Kokedama）源自日本江戶時代的盆栽工藝。我們堅持每一顆苔球皆由職人雙手揉製，嚴選透氣保水的介質比例，並搭配順應四季變化的觀葉與蕨類植物。</p>
+        <p>無論是懸掛於窗邊隨微風輕晃，或是靜置於陶盤之上，它都是一方能讓你放慢呼吸的微型自然。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 精選作品 -->
+  <section id="products" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <span>Collection</span>
+        <h2>本季手作苔球</h2>
+      </div>
+      <div class="product-grid">
+        
+        <!-- 商品 1 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80" alt="山蘇蕨水苔球">
+          </div>
+          <div class="product-info">
+            <span class="product-tag">耐陰好照顧</span>
+            <h3>翠羽山蘇蕨</h3>
+            <p class="product-price">NT$ 680</p>
+            <a href="#contact" class="btn-outline">預約訂製</a>
+          </div>
+        </div>
+
+        <!-- 商品 2 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=600&q=80" alt="圓葉椒草水苔球">
+          </div>
+          <div class="product-info">
+            <span class="product-tag">桌面療癒首選</span>
+            <h3>碧玉圓葉椒草</h3>
+            <p class="product-price">NT$ 750</p>
+            <a href="#contact" class="btn-outline">預約訂製</a>
+          </div>
+        </div>
+
+        <!-- 商品 3 -->
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80" alt="常春藤水苔球">
+          </div>
+          <div class="product-info">
+            <span class="product-tag">懸吊垂墜美學</span>
+            <h3>銀邊常春藤</h3>
+            <p class="product-price">NT$ 820</p>
+            <a href="#contact" class="btn-outline">預約訂製</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 養護指南 -->
+  <section id="care" class="section-padding care">
+    <div class="container">
+      <div class="section-title">
+        <span>Care Guide</span>
+        <h2>與苔球共處的三個日常</h2>
+      </div>
+      <div class="care-grid">
+        <div class="care-item">
+          <div class="care-icon">水</div>
+          <h3>泡水補給</h3>
+          <p>當手感變輕、表層水苔微乾時，將整顆苔球浸入水中約 10 分鐘，吸飽水分後輕壓瀝乾即可。</p>
+        </div>
+        <div class="care-item">
+          <div class="care-icon">光</div>
+          <h3>散射柔光</h3>
+          <p>放置於室內明亮通風處（如窗邊紗簾後），避免夏日正午烈日直射，以免水苔焦黃。</p>
+        </div>
+        <div class="care-item">
+          <div class="care-icon">霧</div>
+          <h3>空氣濕度</h3>
+          <p>乾燥季節可每日用噴霧瓶向葉面與苔球表面輕噴水氣，維持翠綠生機。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 頁尾與聯絡 -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-logo">森球 KOKEDAMA</div>
+      <p class="footer-desc">手作水苔球植栽設計・企業禮贈・空間綠化・手作工作坊</p>
+      <div class="social-links">
+        <a href="#">Instagram</a>
+        <a href="#">Threads</a>
+        <a href="#">LINE 官方帳號</a>
+      </div>
+      <div class="copyright">
+        &copy; 2026 森球 KOKEDAMA Studio. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
